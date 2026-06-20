@@ -1,0 +1,21 @@
+name: audio_data_mining
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - matplotlib
+  - scipy
+  - scikit-learn
+  - jupyter
+  - ipykernel
+  - tqdm
+  - requests
+  - pip
+  - pip:
+      - librosa
+      - soundfile
