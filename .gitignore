@@ -6,3 +6,5 @@ data/external/ESC-50-master.zip
 # Generated ESC-50 subset and feature tables
 data/processed/esc50_subset/
 outputs/features/esc50_audio_features.csv
+__pycache__/
+*.pyc
