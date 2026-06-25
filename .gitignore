@@ -8,3 +8,4 @@ data/processed/esc50_subset/
 outputs/features/esc50_audio_features.csv
 __pycache__/
 *.pyc
+private_notebooks/
