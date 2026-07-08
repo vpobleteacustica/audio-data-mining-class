@@ -1,6 +1,6 @@
 # Audio Data Mining Class
 
-Teaching material for an introductory class on audio data mining, audio signal processing, spectrograms, mel-spectrograms, MFCCs, feature extraction, and simple audio classification.
+Teaching material for an introductory class on audio data mining, audio signal processing, spectrograms, mel-spectrograms, MFCCs, feature extraction, simple audio classification, and pre-trained audio models.
 
 The repository uses the [ESC-50](https://github.com/karolpiczak/ESC-50) dataset as a public dataset for environmental sound analysis.
 
@@ -17,6 +17,8 @@ The repository uses the [ESC-50](https://github.com/karolpiczak/ESC-50) dataset 
 - MFCCs, cepstrum intuition, DCT, and compact audio features
 - Tabular feature extraction from audio signals
 - Simple audio classification workflow
+- Pre-trained audio models for sound event recognition
+- YAMNet predictions and comparison with ESC-50 labels
 
 ## Repository structure
 
@@ -37,7 +39,8 @@ audio-data-mining-class/
 │   ├── 03b_listening_experiment_mel_scale.ipynb
 │   ├── 04_mfcc_feature_representation.ipynb
 │   ├── 05_feature_extraction.ipynb
-│   └── 06_audio_features_classification.ipynb
+│   ├── 06_audio_features_classification.ipynb
+│   └── 07_pretrained_audio_models_yamnet.ipynb
 │
 ├── src/
 │   ├── __init__.py
@@ -98,6 +101,13 @@ Extraction of time-domain, frequency-domain, and cepstral features for tabular m
 
 Simple audio classification workflow using extracted features.
 
+### `07_pretrained_audio_models_yamnet.ipynb`
+
+Pre-trained audio model demo using YAMNet.  
+This notebook compares the real ESC-50 label with YAMNet predictions and visualizes the waveform, log-mel spectrogram, linear-frequency spectrogram, and top predicted sound classes.
+
+The notebook is intended as a pedagogical bridge between hand-crafted feature extraction and modern pre-trained audio models.
+
 ## Setup
 
 Clone the repository:
@@ -113,6 +123,15 @@ Create and activate the conda environment:
 conda env create -f environment.yml
 conda activate audio_data_mining
 ```
+
+If you had already created the environment before the YAMNet notebook was added, update it with:
+
+```bash
+conda env update -f environment.yml --prune
+conda activate audio_data_mining
+```
+
+The update installs additional packages required by YAMNet, including TensorFlow and TensorFlow Hub.
 
 Register the environment as a Jupyter kernel:
 
@@ -190,7 +209,7 @@ python scripts/02_prepare_subset.py
 Suggested order:
 
 ```text
-00 → 01 → 02 → 03 → 03b → 04 → 05 → 06
+00 → 01 → 02 → 03 → 03b → 04 → 05 → 06 → 07
 ```
 
 ## Teaching goal
@@ -217,6 +236,8 @@ MFCCs and other audio features
 tabular dataset
     ↓
 simple classification model
+    ↓
+pre-trained audio model
 ```
 
 ## Requirements
@@ -232,11 +253,33 @@ The project uses Python and common scientific/audio libraries, including:
 - `tqdm`
 - `jupyter`
 - `ipykernel`
+- `tensorflow`
+- `tensorflow_hub`
 
 The recommended installation method is through:
 
 ```bash
 conda env create -f environment.yml
+```
+
+
+## Notes about YAMNet
+
+Notebook `07_pretrained_audio_models_yamnet.ipynb` uses YAMNet, a pre-trained sound event classifier.
+
+The first time the notebook loads the model, an internet connection may be required because the model is downloaded from TensorFlow Hub.
+
+YAMNet expects mono audio sampled at 16 kHz.  
+The notebook handles the resampling step internally using `librosa`.
+
+Because YAMNet was trained with AudioSet labels rather than ESC-50 labels, the comparison is not always an exact label-to-label match. This is useful for discussion:
+
+```text
+exact match
+semantically close prediction
+broader category
+related sound source
+limitation due to silence or temporal averaging
 ```
 
 ## License and dataset attribution
