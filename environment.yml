@@ -19,3 +19,6 @@ dependencies:
   - pip:
       - librosa
       - soundfile
+      - tensorflow
+      - tensorflow_hub
+      - "setuptools<81"
